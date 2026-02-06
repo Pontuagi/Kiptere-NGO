@@ -1,12 +1,50 @@
+'use client'
+
+import { useState, useEffect } from 'react'
+import Image from 'next/image'
+
+const heroImages = [
+  '/images/hero-1.jpeg',
+  '/images/hero-2.jpeg',
+  '/images/hero-3.jpeg',
+]
+
 export default function Hero() {
+  const [currentImage, setCurrentImage] = useState(0)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImage((prev) => (prev + 1) % heroImages.length)
+    }, 5000) // Change image every 5 seconds
+
+    return () => clearInterval(interval)
+  }, [])
+
   return (
-    <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-primary-600 via-primary-500 to-secondary-500 pt-16">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute inset-0" style={{
-          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-        }} />
-      </div>
+    <section className="relative min-h-screen flex items-center justify-center pt-16 overflow-hidden">
+      {/* Background Images with Blur */}
+      {heroImages.map((image, index) => (
+        <div
+          key={image}
+          className={`absolute inset-0 transition-opacity duration-1000 ${
+            index === currentImage ? 'opacity-100' : 'opacity-0'
+          }`}
+        >
+          <Image
+            src={image}
+            alt="Students learning computer skills"
+            fill
+            className="object-cover blur-sm scale-105"
+            priority={index === 0}
+          />
+        </div>
+      ))}
+
+      {/* Dark Overlay for better text readability */}
+      <div className="absolute inset-0 bg-black/50" />
+
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary-600/40 via-primary-500/30 to-secondary-500/40" />
 
       <div className="container-custom mx-auto px-4 md:px-8 relative z-10">
         <div className="max-w-4xl mx-auto text-center text-white">
@@ -17,13 +55,13 @@ export default function Hero() {
           </div>
 
           {/* Main Headline */}
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 drop-shadow-lg">
             Empowering Rural Students Through{' '}
             <span className="text-yellow-300">Digital Education</span>
           </h1>
 
           {/* Subheadline */}
-          <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto mb-10 leading-relaxed">
+          <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto mb-10 leading-relaxed drop-shadow-md">
             We believe every child deserves access to technology. Kiptere NGO is bridging
             the digital divide by bringing computer education to schools in rural Kenya.
           </p>
@@ -47,17 +85,33 @@ export default function Hero() {
           {/* Stats Preview */}
           <div className="mt-16 grid grid-cols-3 gap-8 max-w-2xl mx-auto">
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-yellow-300">500+</div>
+              <div className="text-3xl md:text-4xl font-bold text-yellow-300 drop-shadow-lg">500+</div>
               <div className="text-sm text-white/80 mt-1">Students Reached</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-yellow-300">12</div>
+              <div className="text-3xl md:text-4xl font-bold text-yellow-300 drop-shadow-lg">12</div>
               <div className="text-sm text-white/80 mt-1">Schools Supported</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-yellow-300">50+</div>
+              <div className="text-3xl md:text-4xl font-bold text-yellow-300 drop-shadow-lg">50+</div>
               <div className="text-sm text-white/80 mt-1">Computers Donated</div>
             </div>
+          </div>
+
+          {/* Image Indicators */}
+          <div className="mt-12 flex justify-center gap-2">
+            {heroImages.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentImage(index)}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  index === currentImage
+                    ? 'bg-white w-8'
+                    : 'bg-white/50 hover:bg-white/70'
+                }`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
           </div>
         </div>
       </div>

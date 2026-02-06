@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 const helpOptions = [
   {
     title: 'Make a Donation',
@@ -92,58 +94,75 @@ export default function HowToHelp() {
           {helpOptions.map((option, index) => (
             <div
               key={index}
-              className={`rounded-2xl p-8 ${
+              className={`rounded-2xl p-8 relative overflow-hidden ${
                 option.primary
-                  ? 'bg-gradient-to-br from-primary-500 to-secondary-500 text-white'
+                  ? 'text-white'
                   : 'bg-white border border-gray-100 shadow-sm'
               }`}
             >
-              <div
-                className={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 ${
-                  option.primary
-                    ? 'bg-white/20'
-                    : 'bg-gradient-to-br from-primary-100 to-secondary-100 text-primary-600'
-                }`}
-              >
-                {option.icon}
-              </div>
-              <h3
-                className={`text-xl font-bold mb-3 ${
-                  option.primary ? 'text-white' : 'text-gray-900'
-                }`}
-              >
-                {option.title}
-              </h3>
-              <p
-                className={`mb-6 ${
-                  option.primary ? 'text-white/90' : 'text-gray-600'
-                }`}
-              >
-                {option.description}
-              </p>
-              <a
-                href="#"
-                className={`inline-flex items-center font-semibold transition-colors ${
-                  option.primary
-                    ? 'text-yellow-300 hover:text-yellow-200'
-                    : 'text-primary-600 hover:text-primary-700'
-                }`}
-              >
-                {option.cta}
-                <svg
-                  className="w-4 h-4 ml-2"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
+              {/* Background image for primary card */}
+              {option.primary && (
+                <>
+                  <div className="absolute inset-0">
+                    <Image
+                      src="/images/hero-3.jpeg"
+                      alt="Students learning"
+                      fill
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary-500/90 to-secondary-500/90" />
+                  </div>
+                </>
+              )}
+
+              <div className="relative z-10">
+                <div
+                  className={`w-14 h-14 rounded-xl flex items-center justify-center mb-6 ${
+                    option.primary
+                      ? 'bg-white/20'
+                      : 'bg-gradient-to-br from-primary-100 to-secondary-100 text-primary-600'
+                  }`}
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M17 8l4 4m0 0l-4 4m4-4H3"
-                  />
-                </svg>
-              </a>
+                  {option.icon}
+                </div>
+                <h3
+                  className={`text-xl font-bold mb-3 ${
+                    option.primary ? 'text-white' : 'text-gray-900'
+                  }`}
+                >
+                  {option.title}
+                </h3>
+                <p
+                  className={`mb-6 ${
+                    option.primary ? 'text-white/90' : 'text-gray-600'
+                  }`}
+                >
+                  {option.description}
+                </p>
+                <a
+                  href="#"
+                  className={`inline-flex items-center font-semibold transition-colors ${
+                    option.primary
+                      ? 'text-yellow-300 hover:text-yellow-200'
+                      : 'text-primary-600 hover:text-primary-700'
+                  }`}
+                >
+                  {option.cta}
+                  <svg
+                    className="w-4 h-4 ml-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M17 8l4 4m0 0l-4 4m4-4H3"
+                    />
+                  </svg>
+                </a>
+              </div>
             </div>
           ))}
         </div>

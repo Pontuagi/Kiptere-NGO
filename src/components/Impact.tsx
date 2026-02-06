@@ -1,3 +1,5 @@
+import Image from 'next/image'
+
 const testimonials = [
   {
     quote:
@@ -74,31 +76,45 @@ export default function Impact() {
           ))}
         </div>
 
-        {/* Impact Statistics */}
-        <div className="bg-gradient-to-r from-primary-600 to-secondary-600 rounded-3xl p-8 md:p-12">
-          <div className="text-center mb-10">
-            <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
-              Our Growing Impact
-            </h3>
-            <p className="text-white/80">
-              Every number represents a life touched, a future brightened.
-            </p>
+        {/* Impact Statistics with Background Image */}
+        <div className="relative rounded-3xl overflow-hidden">
+          {/* Background Image */}
+          <div className="absolute inset-0">
+            <Image
+              src="/images/hero-2.jpeg"
+              alt="Students in classroom"
+              fill
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-primary-600/90 to-secondary-600/90" />
           </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {[
-              { number: '500+', label: 'Students Reached' },
-              { number: '12', label: 'Schools Supported' },
-              { number: '50+', label: 'Computers Donated' },
-              { number: '30+', label: 'Teachers Trained' },
-            ].map((stat, index) => (
-              <div key={index} className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-yellow-300 mb-1">
-                  {stat.number}
+          {/* Content */}
+          <div className="relative z-10 p-8 md:p-12">
+            <div className="text-center mb-10">
+              <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
+                Our Growing Impact
+              </h3>
+              <p className="text-white/80">
+                Every number represents a life touched, a future brightened.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+              {[
+                { number: '500+', label: 'Students Reached' },
+                { number: '12', label: 'Schools Supported' },
+                { number: '50+', label: 'Computers Donated' },
+                { number: '30+', label: 'Teachers Trained' },
+              ].map((stat, index) => (
+                <div key={index} className="text-center">
+                  <div className="text-3xl md:text-4xl font-bold text-yellow-300 mb-1">
+                    {stat.number}
+                  </div>
+                  <div className="text-white/80 text-sm">{stat.label}</div>
                 </div>
-                <div className="text-white/80 text-sm">{stat.label}</div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </div>

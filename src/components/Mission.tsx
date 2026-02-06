@@ -1,29 +1,19 @@
+import Image from 'next/image'
+
 export default function Mission() {
   return (
     <section id="mission" className="section-padding bg-white">
       <div className="container-custom mx-auto">
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          {/* Image Placeholder */}
+          {/* Image */}
           <div className="relative">
-            <div className="aspect-[4/3] bg-gradient-to-br from-primary-100 to-secondary-100 rounded-2xl overflow-hidden">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center p-8">
-                  <svg
-                    className="w-24 h-24 text-primary-400 mx-auto mb-4"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={1.5}
-                      d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                    />
-                  </svg>
-                  <p className="text-primary-600 font-medium">Students learning computer skills</p>
-                </div>
-              </div>
+            <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-xl">
+              <Image
+                src="/images/mission.jpeg"
+                alt="Students learning computer skills in a classroom"
+                fill
+                className="object-cover hover:scale-105 transition-transform duration-500"
+              />
             </div>
             {/* Decorative Elements */}
             <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-secondary-500 rounded-2xl -z-10" />
